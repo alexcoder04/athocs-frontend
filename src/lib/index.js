@@ -1,1 +1,2 @@
-// place files you want to import through the `$lib` alias in this folder.
+export const DEPLOYMENT_IP = "192.168.0.86";
+export const DEPLOYMENT_PORT = "3000";
