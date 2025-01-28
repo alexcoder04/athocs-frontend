@@ -54,5 +54,7 @@
         </div>
     </div>
 
-    <img src="http://{DEPLOYMENT_IP}:{DEPLOYMENT_PORT}/graphs/graph-last-24-hours.png" alt="graph of last 24 hours">
+    <div>
+        <img src="http://{DEPLOYMENT_IP}:{DEPLOYMENT_PORT}/graphs/graph-last-24-hours.png" alt="graph of last 24 hours">
+    </div>
 </div>
