@@ -4,6 +4,10 @@
     import "../app.css";
 </script>
 
+<svelte:head>
+    <title>athocs webportal</title>
+</svelte:head>
+
 <div class="min-h-screen bg-slate-700 text-white">
     <HeaderBar />
 
@@ -11,4 +15,3 @@
         {@render children()}
     </main>
 </div>
-
