@@ -17,7 +17,8 @@
         timePeriod: {
             selected: "last-24h",
             options: [
-                { value: "last-24h", label: "Last 24 hours" }
+                { value: "last-24h", label: "Last 24 hours" },
+                { value: "last-7d", label: "Last 7 days" }
             ]
         }
     };
@@ -28,10 +29,11 @@
 
     function handleTimePeriodChange(event) {
       paneData.timePeriod.selected = event.target.value;
+      paneData.image.src = getImageSrc();
     }
 
     function getImageSrc() {
-        return `http://${DEPLOYMENT_IP}:${DEPLOYMENT_PORT}/graphs/graph-last-24-hours.png?t=${Date.now() % 1000000}`
+        return `http://${DEPLOYMENT_IP}:${DEPLOYMENT_PORT}/graphs/${paneData.timePeriod.selected}.png?t=${Date.now() % 1000000}`
     }
 
     function updateReloader() {
