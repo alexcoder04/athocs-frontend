@@ -85,6 +85,10 @@
                 {/each}
             </select>
         </div>
+
+        <button class="text-lg bg-slate-800 text-white py-1 px-2 ml-auto cursor-pointer" on:click={() => {paneData.image.src = getImageSrc()}}>
+            ⟲
+        </button>
     </div>
 
     <a href={paneData.image.src} target="_blank">
