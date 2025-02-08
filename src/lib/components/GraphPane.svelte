@@ -15,11 +15,11 @@
             ]
         },
         timePeriod: {
-            selected: "last-24h",
+            selected: "1d",
             options: [
-                { value: "last-24h", label: "Last 24 hours" },
-                { value: "last-24h-with-avg", label: "Last 24 hours compared to average of last 7 days" },
-                { value: "last-7d", label: "Last 7 days" }
+                { value: "1d", label: "Last 24 hours" },
+                { value: "1d-avg", label: "Last 24 hours compared to average of last 7 days" },
+                { value: "7d", label: "Last 7 days" }
             ]
         }
     };
