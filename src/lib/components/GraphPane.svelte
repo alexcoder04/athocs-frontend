@@ -1,6 +1,7 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import { DEPLOYMENT_IP, DEPLOYMENT_PORT } from "../index.js";
+  import { loadStations } from "$lib/utils.js";
 
     let paneData = {
         image: {
@@ -26,6 +27,7 @@
 
     function handleStationChange(event) {
       paneData.station.selected = event.target.value;
+      paneData.image.src = getImageSrc();
     }
 
     function handleTimePeriodChange(event) {
@@ -34,7 +36,7 @@
     }
 
     function getImageSrc() {
-        return `http://${DEPLOYMENT_IP}:${DEPLOYMENT_PORT}/graphs/${paneData.timePeriod.selected}.png?t=${Date.now() % 1000000}`
+        return `http://${DEPLOYMENT_IP}:${DEPLOYMENT_PORT}/graphs/${paneData.station.selected}-${paneData.timePeriod.selected}.png?t=${Date.now() % 1000000}`
     }
 
     function updateReloader() {
@@ -47,9 +49,18 @@
         }, 1000 * 60 * paneData.image.reloadInterval);
     }
 
-    onMount(() => {
+    onMount(async () => {
         paneData.image.src = getImageSrc();
         updateReloader();
+
+        const stations = await loadStations();
+        
+        if (stations != null) {
+            paneData.station.options = stations.map(st => { return {
+                value: st.id,
+                label: st.id
+            }});
+        }
     });
 
     onDestroy(() => {
