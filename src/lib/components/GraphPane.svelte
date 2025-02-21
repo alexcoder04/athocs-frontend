@@ -1,7 +1,9 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import { DEPLOYMENT_IP, DEPLOYMENT_PORT } from "../index.js";
-  import { loadStations } from "$lib/utils.js";
+    import { loadStations } from "$lib/utils.js";
+
+    export let id;
 
     let paneData = {
         image: {
@@ -12,7 +14,7 @@
         station: {
             selected: "RPIZ-ALEX",
             options: [
-                { value: "RPIZ-ALEX", label: "RPIZ-ALEX" }
+                { value: "RPIZ-ALEX", label: "Alex" }
             ]
         },
         timePeriod: {
@@ -58,17 +60,19 @@
         if (stations != null) {
             paneData.station.options = stations.map(st => { return {
                 value: st.id,
-                label: st.id
+                label: `${st.name.replace("_", " ")} [${st.id}]`
             }});
         }
     });
 
     onDestroy(() => {
         clearInterval(paneData.image.interval);
+
+
     });
 </script>
 
-<div class="w-full xl:w-1/2 p-2 flex-col container">
+<div class="w-full xl:w-1/2 p-2 flex-col container" id="graphpane-{id}">
     <div class="bg-slate-600 text-white p-4 container flex items-center space-x-4">
         <div class="flex items-center text-lg bg-slate-800 py-1 px-2">
             <label for="station-dropdown">📡 </label>
@@ -104,6 +108,6 @@
     </div>
 
     <a href={paneData.image.src} target="_blank">
-        <img src={paneData.image.src} alt="graph of last 24 hours">
+        <img src={paneData.image.src} alt="temperature/humidity/pressure graph">
     </a>
 </div>
